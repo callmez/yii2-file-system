@@ -1,2 +1,2 @@
-yii2-flysystem
+yii2-file-system
 ==============

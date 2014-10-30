@@ -1,13 +1,13 @@
 {
-    "name": "callmez/yii2-flysystem",
+    "name": "callmez/yii2-file-system",
     "type": "yii2-extension",
     "description": "This extension provides a filesystem solution for Yii 2.",
-    "keywords": ["yii2", "filesystem", "flysystem", "qiniu"],
+    "keywords": ["yii2", "filesystem", "file-system", "qiniu"],
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/callmez/yii2-flysystem/issues",
-        "wiki": "https://github.com/callmez/yii2-flysystem/wiki",
-        "source": "https://github.com/callmez/yii2-flysystem"
+        "issues": "https://github.com/callmez/yii2-file-system/issues",
+        "wiki": "https://github.com/callmez/yii2-file-system/wiki",
+        "source": "https://github.com/callmez/yii2-file-system"
     },
     "authors": [
         {
@@ -18,11 +18,11 @@
     "require": { 
         "yiisoft/yii2": "*",
         "qiniu/php-sdk": "*",
-        "league/flysystem": "*"
+        "league/file-system": "*"
     },
     "autoload": {
         "psr-4": {
-            "callmez\\flysystem\\": ""
+            "callmez\\file\\system\\": ""
         }
     }
 }
