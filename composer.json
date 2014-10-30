@@ -15,7 +15,7 @@
             "email": "callme-z@qq.com"
         }
     ],
-    "require": {
+    "require": { 
         "yiisoft/yii2": "*",
         "qiniu/php-sdk": "*",
         "league/flysystem": "*"
