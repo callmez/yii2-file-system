@@ -34,7 +34,7 @@ class Collection extends Component
         $this->_fileSystems = $fileSystems;
     }
 
-    public function get($id)
+    public function get($id = null)
     {
         $id === null && $id = $this->defaultFileSystem;
         if (!$this->has($id)) {
