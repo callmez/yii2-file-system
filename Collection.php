@@ -1,6 +1,7 @@
 <?php
 namespace callmez\file\system;
 
+use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
@@ -40,22 +41,23 @@ class Collection extends Component
             throw new InvalidParamException("Unknown file system '{$id}'.");
         }
         if (!is_object($this->_fileSystems[$id])) {
-            $this->_fileSystems[$id] = $this->create($id, $this->_fileSystems[$id]);
-            if (!is_subclass_of($this->_fileSystems[$id], $this->fileSystemClass)) {
-                throw new InvalidParamException("The file system '{$id}' must extend from '{$this->fileSystemClass}'.");
-            }
+            $this->_fileSystems[$id] = $this->create($this->_fileSystems[$id]);
         }
         return $this->_fileSystems[$id];
     }
 
     public function has($id)
     {
-        return array_key_exists($id, $this->_storages);
+        return array_key_exists($id, $this->_fileSystems);
     }
 
-    public function create($id, $config)
+    public function create($config)
     {
-        $config['id'] = $id;
-        return Yii::createObject($config);
+        if (!isset($config['class'])) {
+            throw new InvalidConfigException('File system config must be an array containing a "class" element.');
+        }
+        $class = $config['class'];
+        unset($config['class']);
+        return Yii::createObject($this->fileSystemClass, [Yii::createObject($class, array_values($config))]);
     }
 }

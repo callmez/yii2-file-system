@@ -21,6 +21,7 @@
         "league/flysystem": "*"
     },
     "autoload": {
+        "files": {}
         "psr-4": {
             "callmez\\file\\system\\": ""
         }
