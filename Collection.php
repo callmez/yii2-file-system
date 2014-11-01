@@ -8,7 +8,6 @@ use yii\base\InvalidParamException;
 
 class Collection extends Component
 {
-    public $defaultFileSystem;
     public $fileSystemClass = 'League\Flysystem\Filesystem';
     private $_fileSystems = [];
 
@@ -34,9 +33,8 @@ class Collection extends Component
         $this->_fileSystems = $fileSystems;
     }
 
-    public function get($id = null)
+    public function get($id)
     {
-        $id === null && $id = $this->defaultFileSystem;
         if (!$this->has($id)) {
             throw new InvalidParamException("Unknown file system '{$id}'.");
         }
