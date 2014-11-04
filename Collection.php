@@ -8,15 +8,7 @@ use yii\base\InvalidParamException;
 
 class Collection extends Component
 {
-    public $fileSystemClass = 'League\Flysystem\Filesystem';
     private $_fileSystems = [];
-
-    public function init()
-    {
-        if ($this->defaultFileSystem === null) {
-            throw new InvalidConfigException("The 'defaultFileSystem' property must be set.");
-        }
-    }
 
     public function getFileSystems()
     {
@@ -51,11 +43,6 @@ class Collection extends Component
 
     public function create($config)
     {
-        if (!isset($config['class'])) {
-            throw new InvalidConfigException('File system config must be an array containing a "class" element.');
-        }
-        $class = $config['class'];
-        unset($config['class']);
-        return Yii::createObject($this->fileSystemClass, [Yii::createObject($class, array_values($config))]);
+        return Yii::createObject($config);
     }
 }
