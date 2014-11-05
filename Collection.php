@@ -30,7 +30,7 @@ class Collection extends Component
         if (!$this->has($id)) {
             throw new InvalidParamException("Unknown file system '{$id}'.");
         }
-        if (!is_object($this->_fileSystems[$id])) {
+        if (!is_object($this->_fileSystems[$id]) || is_callable($this->_fileSystems[$id])) {
             $this->_fileSystems[$id] = $this->create($this->_fileSystems[$id]);
         }
         return $this->_fileSystems[$id];
