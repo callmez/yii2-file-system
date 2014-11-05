@@ -23,6 +23,7 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
 ###使用`Componser`安装 (以下2种方式)
 - 命令行执行 `composer require callmez/file/system`
 - 编辑`composer.json` 
+
   ```php
   "require": {
       ...
@@ -31,6 +32,7 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
   ```
 ### 编辑配置文件
 - 编辑`config/main.php`
+
   ```php
   'components' => [
     'fileSystemCollection' => [
@@ -57,6 +59,7 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
   ]
   ```
 - 使用例子
+
   ```php
     $local = Yii::$app->fileSystemConnection->get('local');
     $local->write('test.txt', 'hello world');
