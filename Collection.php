@@ -32,6 +32,9 @@ class Collection extends Component
         }
         if (!is_object($this->_fileSystems[$id]) || is_callable($this->_fileSystems[$id])) {
             $this->_fileSystems[$id] = $this->create($this->_fileSystems[$id]);
+            if (!($this->_fileSystems[$id] instanceof FileSystem)) {
+                throw new InvalidConfigException("The file system class '{$id}'' must extend from callmez\\file\\system\FileSystem");
+            }
         }
         return $this->_fileSystems[$id];
     }
