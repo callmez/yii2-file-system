@@ -100,17 +100,26 @@ class Qiniu extends AbstractAdapter
      */
     public function read($path)
     {
-        $getPolicy = new \Qiniu_RS_GetPolicy();
-        $url = $getPolicy->MakeRequest($this->getUrl($path), null);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $contents = curl_exec($ch);
-        curl_close($ch);
-
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $this->getPrivateUrl($path));
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//        $contents = curl_exec($ch);
+//        curl_close($ch);
+        $contents = stream_get_contents($this->readStream($path)['stream']);
         return compact('contents', 'path');
+    }
+
+    /**
+     * Get a read-stream for a file
+     *
+     * @param $path
+     * @return array|bool
+     */
+    public function readStream($path)
+    {
+        $stream = fopen($this->getPrivateUrl($path), 'r');
+        return compact('stream', 'path');
     }
 
     /**
@@ -256,9 +265,25 @@ class Qiniu extends AbstractAdapter
         ];
     }
 
+    /**
+     * 获取公有资源地址
+     * @param $path
+     * @return string
+     */
     public function getUrl($path)
     {
         return Qiniu_RS_MakeBaseUrl($this->domain, $path);
+    }
+
+    /**
+     * 获取私有资源地址(公有资源一样可用)
+     * @param $path
+     * @return string
+     */
+    public function getPrivateUrl($path)
+    {
+        $getPolicy = new \Qiniu_RS_GetPolicy();
+        return $getPolicy->MakeRequest($this->getUrl($path), null);
     }
 
     protected function getClient()
