@@ -1,8 +1,8 @@
 <?php
 namespace callmez\file\system\adapters;
 
-use League\Flysystem\Util;
 use Yii;
+use League\Flysystem\Util;
 use League\Flysystem\Adapter\AbstractAdapter;
 
 // 列举资源
@@ -40,15 +40,20 @@ class Qiniu extends AbstractAdapter
      */
     public function write($path, $contents, $config = null)
     {
-        $bucket = $this->bucket . (empty($config->settings['update']) ? '' : ':' . $path);
-        $putPolicy = new \Qiniu_RS_PutPolicy($bucket);
-        $upToken = $putPolicy->Token(null);
-        list($ret, $err) = Qiniu_Put($upToken, $path, $contents, null);
-        if ($err !== null) {
-            return false;
-        }
-        $mimetype = Util::guessMimeType($path, $contents);
-        return compact('mimetype', 'path');
+        return $this->update($path, $contents, $config);
+    }
+
+    /**
+     * Write using a stream
+     *
+     * @param $path
+     * @param $resource
+     * @param null $config
+     * @return array|bool
+     */
+    public function writeStream($path, $resource, $config = null)
+    {
+        return $this->updateStream($path, $resource, $config);
     }
 
     /**
@@ -61,8 +66,30 @@ class Qiniu extends AbstractAdapter
      */
     public function update($path, $contents, $config = null)
     {
-        $config->settings['update'] = true;
-        return $this->write($path, $contents, $config);
+        list($ret, $err) = Qiniu_RS_Put($this->getClient(), $this->bucket, $path, $contents, null);
+        if ($err !== null) {
+            return false;
+        }
+        $mimetype = Util::guessMimeType($path, $contents);
+        return compact('mimetype', 'path');
+    }
+
+    /**
+     * Update a file using a stream
+     *
+     * @param   string    $path
+     * @param   resource  $resource
+     * @param   mixed     $config   Config object or visibility setting
+     * @return  array|bool
+     */
+    public function updateStream($path, $resource, $config = null)
+    {
+        $size = Util::getStreamSize($resource);
+        list($ret, $err) = Qiniu_RS_Rput($this->getClient(), $this->bucket, $path, $resource, $size, null);
+        if ($err !== null) {
+            return false;
+        }
+        return compact('path', 'size');
     }
 
     /**
@@ -223,7 +250,6 @@ class Qiniu extends AbstractAdapter
     protected function normalizeData($file)
     {
         return [
-            'path' => $file['key'],
             'size' => $file['fsize'],
             'mimetype' => $file['mimeType'],
             'timestamp' => (int)($file['putTime'] / 10000000) //Epoch 时间戳
