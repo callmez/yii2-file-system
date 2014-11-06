@@ -21,13 +21,13 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
 使用教程
 ========
 ###使用`Componser`安装 (以下2种方式)
-- 命令行执行 `composer require callmez/file/system`
+- 命令行执行 `composer require callmez/yii2-file-system`
 - 编辑`composer.json` 
 
   ```php
   "require": {
       ...
-      "callmez/file/system": "*"
+      "callmez/yii2-file-system": "*"
   },
   ```
 ### 编辑配置文件
