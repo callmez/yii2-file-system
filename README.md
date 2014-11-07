@@ -1,7 +1,7 @@
 
 yii2-file-system
 =================
-Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础上基于 [Yii2](https://github.com/yiisoft/yii2) 框架的实现的扩展。 
+Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础上基于 [Yii2](https://github.com/yiisoft/yii2) 框架的实现的扩展。 **任何存储,统一的函数调用**
 
 ###扩展功能
 - Local 本地存储支持Yii(例:`@web/assets`)别名路径 
