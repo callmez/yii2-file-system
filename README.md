@@ -1,7 +1,7 @@
 
 yii2-file-system
 =================
-Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础上基于 [Yii2](https://github.com/yiisoft/yii2) 框架的实现的扩展。 
+Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础上基于 [Yii2](https://github.com/yiisoft/yii2) 框架的实现的扩展。 **任何存储,统一的函数调用**
 
 ###扩展功能
 - Local 本地存储支持Yii(例:`@web/assets`)别名路径 
@@ -21,13 +21,13 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
 使用教程
 ========
 ###使用`Componser`安装 (以下2种方式)
-- 命令行执行 `composer require callmez/file/system`
+- 命令行执行 `composer require callmez/yii2-file-system`
 - 编辑`composer.json` 
 
   ```php
   "require": {
       ...
-      "callmez/file/system": "*"
+      "callmez/yii2-file-system": "*"
   },
   ```
 ### 编辑配置文件
@@ -50,7 +50,7 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
                           '七牛空间的 bucket',
                           '七牛空间的 access key',
                           '七牛空间的 access secret',
-                          '七牛的空间域名,选填, 默认为 bucket.qiniu.com'
+                          '七牛的空间域名,默认为 {bucket}.qiniu.com 选填'
                       )
                   );
               }
