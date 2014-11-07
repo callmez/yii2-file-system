@@ -50,7 +50,7 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
                           '七牛空间的 bucket',
                           '七牛空间的 access key',
                           '七牛空间的 access secret',
-                          '七牛的空间域名,选填, 默认为 bucket.qiniu.com'
+                          '七牛的空间域名,默认为 {bucket}.qiniu.com 选填'
                       )
                   );
               }
