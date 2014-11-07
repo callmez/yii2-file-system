@@ -3,8 +3,9 @@ namespace callmez\file\system;
 
 use Yii;
 use yii\base\Component;
-use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
+use yii\base\InvalidConfigException;
+use League\Flysystem\Filesystem;
 
 class Collection extends Component
 {
@@ -41,8 +42,12 @@ class Collection extends Component
         return array_key_exists($id, $this->_fileSystems);
     }
 
-    public function create($id, $config)
+    protected function create($id, $config)
     {
-        return Yii::createObject($config);
+        $object = Yii::createObject($config);
+        if (!($object instanceof Filesystem)) {
+            throw new InvalidConfigException("The file system class {$id} must extend from League\\Flysystem\\Filesystem.");
+        }
+        return $object;
     }
 }

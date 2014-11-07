@@ -2,7 +2,7 @@
     "name": "callmez/yii2-file-system",
     "type": "yii2-extension",
     "description": "This extension provides a filesystem solution for Yii 2.",
-    "keywords": ["yii2", "flysystem", "file-system", "qiniu"],
+    "keywords": ["yii2", "flysystem", "file", "system", "storage", "qiniu"],
     "license": "MIT",
     "support": {
         "issues": "https://github.com/callmez/yii2-file-system/issues",
