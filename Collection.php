@@ -75,7 +75,7 @@ class Collection extends Component
      * @param   array $arguments
      * @return  array  [:prefix, :arguments]
      */
-    public function filterPrefix(array $arguments)
+    protected function filterPrefix(array $arguments)
     {
         if (empty($arguments)) {
             throw new InvalidCallException('At least one argument needed');

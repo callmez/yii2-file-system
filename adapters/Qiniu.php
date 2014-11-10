@@ -166,9 +166,9 @@ class Qiniu extends AbstractAdapter
         $files = [];
         foreach($this->listDirContents($directory) as $k => $file) {
             $pathInfo = pathinfo($file['key']);
-            $files[] = array_merge([
+            $files[] = array_merge($pathInfo, $this->normalizeData($file), [
                 'type' => isset($pathInfo['extension']) ? 'file' : 'dir',
-            ], $pathInfo, $this->normalizeData($file));
+            ]);
         }
         return $files;
     }
@@ -185,6 +185,7 @@ class Qiniu extends AbstractAdapter
         if ($err !== null) {
             return false;
         }
+        $ret['key'] = $path
         return $this->normalizeData($ret);
     }
 
@@ -253,6 +254,7 @@ class Qiniu extends AbstractAdapter
     protected function normalizeData($file)
     {
         return [
+            'path' => $file['key'],
             'size' => $file['fsize'],
             'mimetype' => $file['mimeType'],
             'timestamp' => (int)($file['putTime'] / 10000000) //Epoch 时间戳
