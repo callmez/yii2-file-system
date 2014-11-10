@@ -30,12 +30,12 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
       "callmez/yii2-file-system": "*"
   },
   ```
-### 编辑配置文件
+### 编辑配置文件(2种使用方式)
 - 编辑`config/main.php`
 
   ```php
   'components' => [
-    'fileSystemCollection' => [
+    'fileSystemCollection或者fileSystem(第二种名称作为wrapper形式推荐)' => [
       'class' => 'callmez\file\system\Collection',
           'fileSystems' => [
               //根据需求可设置多个存储, 以下来使用例子
@@ -58,10 +58,21 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
     ]
   ]
   ```
-- 使用例子
+- 使用例子(推荐wrapper方式)
 
   ```php
+    // 集合方式
     $local = Yii::$app->fileSystemConnection->get('local');
     $local->write('test.txt', 'hello world');
     echo $local->read('text.txt');
+    
+    $qiniu = Yii::$app->fileSystemConnection->get('qiniu');
+    $qiniu->write('test.txt', 'hello world');
+    echo $qiniu->read('text.txt');
+    
+    // wrapper 方式 (请注意, component命名方式)
+    //等同于Yii::$app->fileSystemConnection->get('local')->write('test.txt', 'hello world');
+    Yii::$app->fileSystem->write('local://test.txt', 'hello world'); 
+    //等同于Yii::$app->fileSystemConnection->get('qiniu')->write('test.txt', 'hello world');
+    Yii::$app->fileSystem->write('qiniu://test.txt', 'hello world'); 
   ```
