@@ -3,6 +3,7 @@ namespace callmez\file\system\adapters;
 
 use Yii;
 use League\Flysystem\Util;
+use League\Flysystem\Config;
 use League\Flysystem\Adapter\AbstractAdapter;
 
 // 列举资源
@@ -38,7 +39,7 @@ class Qiniu extends AbstractAdapter
      * @param null $config
      * @return array|bool
      */
-    public function write($path, $contents, $config = null)
+    public function write($path, $contents, Config $config)
     {
         return $this->update($path, $contents, $config);
     }
@@ -51,7 +52,7 @@ class Qiniu extends AbstractAdapter
      * @param null $config
      * @return array|bool
      */
-    public function writeStream($path, $resource, $config = null)
+    public function writeStream($path, $resource, Config $config)
     {
         return $this->updateStream($path, $resource, $config);
     }
@@ -64,7 +65,7 @@ class Qiniu extends AbstractAdapter
      * @param   mixed        $config   Config object or visibility setting
      * @return  array|bool
      */
-    public function update($path, $contents, $config = null)
+    public function update($path, $contents, Config $config)
     {
         list($ret, $err) = Qiniu_RS_Put($this->getClient(), $this->bucket, $path, $contents, null);
         if ($err !== null) {
@@ -82,7 +83,7 @@ class Qiniu extends AbstractAdapter
      * @param   mixed     $config   Config object or visibility setting
      * @return  array|bool
      */
-    public function updateStream($path, $resource, $config = null)
+    public function updateStream($path, $resource, Config $config)
     {
         $size = Util::getStreamSize($resource);
         list($ret, $err) = Qiniu_RS_Rput($this->getClient(), $this->bucket, $path, $resource, $size, null);
@@ -185,7 +186,7 @@ class Qiniu extends AbstractAdapter
         if ($err !== null) {
             return false;
         }
-        $ret['key'] = $path
+        $ret['key'] = $path;
         return $this->normalizeData($ret);
     }
 
@@ -230,7 +231,7 @@ class Qiniu extends AbstractAdapter
      *
      * @return  bool
      */
-    public function createDir($dirname, $options = null)
+    public function createDir($dirname, Config $config)
     {
         return ['path' => $dirname];
     }
