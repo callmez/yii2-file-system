@@ -100,12 +100,6 @@ class Qiniu extends AbstractAdapter
      */
     public function read($path)
     {
-//        $ch = curl_init();
-//        curl_setopt($ch, CURLOPT_URL, $this->getPrivateUrl($path));
-//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//        $contents = curl_exec($ch);
-//        curl_close($ch);
         $contents = stream_get_contents($this->readStream($path)['stream']);
         return compact('contents', 'path');
     }
