@@ -255,6 +255,7 @@ class Qiniu extends AbstractAdapter
     protected function normalizeData($file)
     {
         return [
+            'type' => 'file',
             'path' => $file['key'],
             'size' => $file['fsize'],
             'mimetype' => $file['mimeType'],
