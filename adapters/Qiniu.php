@@ -90,7 +90,7 @@ class Qiniu extends AbstractAdapter
         if ($err !== null) {
             return false;
         }
-        return compact('path', 'size');
+        return compact('size', 'path');
     }
 
     /**
