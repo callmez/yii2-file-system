@@ -8,8 +8,8 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
 - Qinu 七牛云存储
 
 ### 将要实现的功能 (欢迎PR)
-- 阿里云存储
-- 又拍云存储
+- 阿里云存储 
+- 又拍云存储 (未实现大文件流API[还是老牌存储...], 如果实现功能后.大文件操作会有资源要求)
 - 百度云存储
 - 新浪云存储
 
