@@ -9,6 +9,10 @@ use League\Flysystem\Adapter\AbstractAdapter;
 // 列举资源
 require_once Yii::getAlias("@vendor/qiniu/php-sdk/qiniu/rsf.php");
 
+/**
+ * 七牛文件系统类, 扩展七牛云存储功能
+ * @package callmez\file\system\adapters
+ */
 class Qiniu extends AbstractAdapter
 {
     public $bucket;
