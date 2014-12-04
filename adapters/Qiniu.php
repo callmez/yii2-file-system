@@ -5,6 +5,7 @@ use Yii;
 use League\Flysystem\Util;
 use League\Flysystem\Config;
 use League\Flysystem\Adapter\AbstractAdapter;
+use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 
 // 列举资源
 require_once Yii::getAlias("@vendor/qiniu/php-sdk/qiniu/rsf.php");
@@ -15,6 +16,7 @@ require_once Yii::getAlias("@vendor/qiniu/php-sdk/qiniu/rsf.php");
  */
 class Qiniu extends AbstractAdapter
 {
+    use NotSupportingVisibilityTrait;
     public $bucket;
     public $domain;
     private $_client;
