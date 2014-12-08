@@ -3,8 +3,7 @@ yii2-file-system
 =================
 Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础上基于 [Yii2](https://github.com/yiisoft/yii2) 框架的实现的扩展。 **任何存储,统一的函数调用**
 
-###扩展功能
-- Local 本地存储
+###扩展存储
 - Qinu 七牛云存储
 
 ### 将要实现的功能 (欢迎PR)
