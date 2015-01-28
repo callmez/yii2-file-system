@@ -268,6 +268,19 @@ class Qiniu extends AbstractAdapter
             'timestamp' => (int)($file['putTime'] / 10000000) //Epoch 时间戳
         ];
     }
+   
+    public function getVisibility($path)
+    {
+        $visibility = AdapterInterface::VISIBILITY_PUBLIC;
+        return compact('visibility');
+    }
+    
+    public function setVisibility($path, $visibility)
+    {
+        // 七牛无权限概念，统一设置public
+        $visibility = AdapterInterface::VISIBILITY_PUBLIC;
+        return compact('visibility');
+    }
 
     /**
      * 获取公有资源地址
