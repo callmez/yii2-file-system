@@ -17,7 +17,7 @@
     ],
     "require": { 
         "yiisoft/yii2": "*",
-        "qiniu/php-sdk": "*",
+        "qiniu/php-sdk": "~6.0",
         "league/flysystem": "*"
     },
     "autoload": {
