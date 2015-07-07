@@ -63,11 +63,11 @@ Yii2-file-system是 [Flysystem](https://github.com/thephpleague/flysystem)基础
     // 集合方式
     $local = Yii::$app->fileSystem->get('local');
     $local->write('test.txt', 'hello world');
-    echo $local->read('text.txt');
+    echo $local->read('test.txt');
     
     $qiniu = Yii::$app->fileSystem->get('qiniu');
     $qiniu->write('test.txt', 'hello world');
-    echo $qiniu->read('text.txt');
+    echo $qiniu->read('test.txt');
     
     // wrapper 方式 (推荐)
     //等同于Yii::$app->fileSystem->get('local')->write('test.txt', 'hello world');
